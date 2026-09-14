@@ -1,0 +1,17 @@
+{
+  "api": {
+    "user": {
+      "createdSuccess": "Cadastro realizado com sucesso",
+      "duplicateEmail": "Este email já está sendo usado"
+    }
+  },
+  "gui": {
+    "login": {
+      "invalidCredentials": "Email e/ou senha inválidos"
+    },
+    "home": {
+      "welcomeTitle": "Bem Vindo",
+      "leadMessage": "Este é seu sistema para administrar seu ecommerce."
+    }
+  }
+}

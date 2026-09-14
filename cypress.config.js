@@ -12,9 +12,7 @@ module.exports = defineConfig({
   },
   e2e: {
     baseUrl: 'https://front.serverest.dev',
-    env: {
-      apiUrl: 'https://serverest.dev'
-    },
+    expose: { apiUrl: 'https://serverest.dev' },
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
       return config;

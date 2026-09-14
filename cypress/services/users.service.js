@@ -8,21 +8,13 @@ class UserService {
         })
     }
 
-    getUserById(id) {
+    getUsers() {
         return cy.request({
-            method: 'GET', 
-            url: `\({Cypress.expose('apiUrl')}/usuarios/\){id}`,
+            method: 'GET',
+            url: `${Cypress.expose('apiUrl')}/usuarios`,
             failOnStatusCode: false
         })
     }
-
-    getUsers() {
-    return cy.request({
-      method: 'GET',
-      url: `${Cypress.expose('apiUrl')}/usuarios`,
-      failOnStatusCode: false
-    });
-  }
 }
 
 export default new UserService();

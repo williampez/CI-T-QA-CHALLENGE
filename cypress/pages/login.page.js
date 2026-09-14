@@ -1,4 +1,5 @@
 class LoginPage {
+    // prioriza data-testid nos seletores: mais estavel que classe/texto, nao quebra com mudanca de layout
     elements = {
         emailInput: () => cy.get('[data-testid="email"]'),
         passwordInput: () => cy.get('[data-testid="senha"]'),

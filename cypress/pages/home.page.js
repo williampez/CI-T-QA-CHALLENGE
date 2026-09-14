@@ -5,15 +5,15 @@ class HomePage {
         leadMessage: () => cy.get('.jumbotron p.lead')
     };
 
-    validateLoginSuccess(userName) {
+    validateLoginSuccess(userName, texts) {
         cy.url().should('include', '/admin/home');
         this.elements.logoutBtn().should('be.visible');
 
         this.elements.welcomeTitle()
         .should('be.visible')
-        .and('contain.text', 'Bem Vindo')
+        .and('contain.text', texts.welcomeTitle)
         .and('contain.text', userName)
-        this.elements.leadMessage().should('have.text', 'Este é seu sistema para administrar seu ecommerce.');
+        this.elements.leadMessage().should('have.text', texts.leadMessage);
     }
 }
 

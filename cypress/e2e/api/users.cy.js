@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker';
 import userService from '../../services/users.service';
+import { UserFactory } from '../../support/factories/user.factory';
 
 describe ('API - Users Endpoint', () => {
     let validUser;
@@ -14,12 +14,9 @@ describe ('API - Users Endpoint', () => {
     })
 
     beforeEach(() => {
-     validUser = {
-        nome: faker.person.fullName(),
-        email: faker.internet.email().toLowerCase(),
-        password: faker.internet.password({ length: 8 }),
-        administrador: 'true'
-     }
+        // UserFactory e a fonte unica de criacao de usuario em todo o projeto,
+        // garantindo dados dinamicos e evitando duplicacao entre os specs.
+        validUser = UserFactory.buildUser();
     })
 
     it('1. Should register a new user successfully (Happy path)', () => {

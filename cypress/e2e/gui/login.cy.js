@@ -5,6 +5,15 @@ import { UserFactory } from '../../support/factories/user.factory';
 
 describe('E2E - Authenticate', () => {
     let userMassa;
+    let messages;
+
+    before(() => {
+        // Fixtures centralizam os dados esperados, evitando strings hardcoded
+        // espalhadas pelos testes e facilitando a manutencao.
+        cy.fixture('messages').then((data) => {
+            messages = data;
+        });
+    })
 
     beforeEach(() => {
         userMassa = UserFactory.buildUser();
@@ -14,14 +23,16 @@ describe('E2E - Authenticate', () => {
 
     it('1. Should authenticate successfully using valid credentials (Happy path)', () => {
         cy.uiLogin(userMassa.email, userMassa.password)
-        homePage.validateLoginSuccess(userMassa.nome);
+        // O Page Object recebe os textos esperados por parametro: quem conhece
+        // os dados de teste e o spec, nao a pagina (separacao de responsabilidades).
+        homePage.validateLoginSuccess(userMassa.nome, messages.gui.home);
     })
 
     it('2. Should display an error alert when submitting an incorrect password (negative path)', () => {
         cy.uiLogin(userMassa.email, 'SenhaInvalida@2026');
         loginPage.elements.alertMessage()
         .should('be.visible')
-        .and('contain.text', 'Email e/ou senha inválidos');
+        .and('contain.text', messages.gui.login.invalidCredentials);
     })
 
     it('3. Should display an error alert when attempting to authenticate with an unregistered email (Business Rule)', () => {
@@ -29,6 +40,6 @@ describe('E2E - Authenticate', () => {
         cy.uiLogin(emailInexistente, userMassa.password);
         loginPage.elements.alertMessage()
         .should('be.visible')
-        .and('contain.text', 'Email e/ou senha inválidos')
+        .and('contain.text', messages.gui.login.invalidCredentials)
     })
 })

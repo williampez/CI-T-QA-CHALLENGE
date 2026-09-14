@@ -8,8 +8,6 @@ describe('E2E - Authenticate', () => {
     let messages;
 
     before(() => {
-        // Fixtures centralizam os dados esperados, evitando strings hardcoded
-        // espalhadas pelos testes e facilitando a manutencao.
         cy.fixture('messages').then((data) => {
             messages = data;
         });
@@ -23,8 +21,8 @@ describe('E2E - Authenticate', () => {
 
     it('1. Should authenticate successfully using valid credentials (Happy path)', () => {
         cy.uiLogin(userMassa.email, userMassa.password)
-        // O Page Object recebe os textos esperados por parametro: quem conhece
-        // os dados de teste e o spec, nao a pagina (separacao de responsabilidades).
+        // O Page Object recebe os textos esperados por parametro
+        // é realizada a separação de responsabilidade para respeitar o POM.
         homePage.validateLoginSuccess(userMassa.nome, messages.gui.home);
     })
 

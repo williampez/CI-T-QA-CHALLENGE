@@ -7,8 +7,8 @@ describe('API - Login Endpoint', () => {
     let messages;
 
     before(() => {
-        // Fixtures centralizam os dados esperados, evitando strings hardcoded
-        // espalhadas pelos testes e facilitando a manutencao.
+        // Uso de Fixtures para centralizar os dados, evitando o uso de mensagens
+        // hardcoded espalhadas pelos testes
         cy.fixture('messages').then((data) => {
             messages = data;
         });
@@ -35,6 +35,7 @@ describe('API - Login Endpoint', () => {
         authService.login(validUser.email, 'wrong_password_2026').then((response) => {
             expect(response.status).to.eq(401);
             expect(response.body.message).to.eq(messages.api.login.invalidCredentials);
+            // garante que a API nao devolve token quando o login falha
             expect(response.body).to.not.have.property('authorization');
         })
     })

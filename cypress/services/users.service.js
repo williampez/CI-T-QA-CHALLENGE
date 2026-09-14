@@ -2,7 +2,7 @@ class UserService {
     postUser(payload) {
         return cy.request({
             method: 'POST',
-            url: `${Cypress.expose('apiUrl')}/usuarios`, //removido no cypress 16 e depresseado no 15
+            url: `${Cypress.expose('apiUrl')}/usuarios`, //Cypress.env foi removido na v16, então estou utilizando expose
             body: payload,
             failOnStatusCode: false
         })

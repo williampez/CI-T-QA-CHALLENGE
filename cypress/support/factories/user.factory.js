@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 export class UserFactory {
+    // administrador vem como string ('true'/'false') porque e assim que a API do ServeRest espera
     static buildUser(isAdmin = 'true') {
         return {
             nome: faker.person.fullName(),
@@ -10,6 +11,7 @@ export class UserFactory {
         }
     }
 
+    // uso o timestamp pra garantir email sempre unico e nao esbarrar na regra de duplicidade
     static buildInvalidEmail() {
         return `invalid_email_${Date.now()}@inexistente.com`
     }

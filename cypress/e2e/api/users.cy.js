@@ -6,8 +6,6 @@ describe ('API - Users Endpoint', () => {
     let messages;
 
     before(() => {
-        // Fixtures centralizam os dados esperados, evitando strings hardcoded
-        // espalhadas pelos testes e facilitando a manutencao.
         cy.fixture('messages').then((data) => {
             messages = data;
         });
@@ -30,6 +28,7 @@ describe ('API - Users Endpoint', () => {
     })
 
 it('2. Should not allow registration with a duplicate email (Business Rule)', () => {
+    // cadastro o mesmo usuario duas vezes de proposito pra bater na regra de email unico
     userService.postUser(validUser).then(() => {
       userService.postUser(validUser).then((response) => {
         expect(response.status).to.eq(400);

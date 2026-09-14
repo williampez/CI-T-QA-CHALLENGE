@@ -1,13 +1,14 @@
-name: CI/CD - API Automated Tests
+name: CI/CD - E2E & API Automated Tests
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: ["main", "master"]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: ["main", "master"]
 
 jobs:
-  cypress-api-run:
+  cypress-run:
+    name: Run Cypress Suite (API + GUI)
     runs-on: ubuntu-latest
 
     steps:
@@ -17,17 +18,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: "npm"
 
       - name: Install Dependencies
         run: npm ci
 
-      - name: Run Cypress API Tests & Generate Report
-        run: npm run report:api
+      - name: Run Cypress Suite & Generate Report
+        run: npm run test:ci
 
       - name: Upload Mochawesome Report Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cypress-api-execution-report
+          name: cypress-execution-report
           path: cypress/reports
+          retention-days: 7

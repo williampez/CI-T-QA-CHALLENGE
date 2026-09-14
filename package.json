@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "cypress:open": "cypress open",
+    "test": "cypress run",
+    "test:ci": "cypress run --browser chrome",
     "test:api": "cypress run --spec 'cypress/e2e/api/**'",
-    "report:api": "cypress run --spec 'cypress/e2e/api/**' --reporter cypress-mochawesome-reporter"  
-    
+    "test:gui": "cypress run --spec 'cypress/e2e/gui/**'"
   },
   "keywords": [],
   "author": "",

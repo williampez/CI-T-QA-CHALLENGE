@@ -3,6 +3,10 @@
     "user": {
       "createdSuccess": "Cadastro realizado com sucesso",
       "duplicateEmail": "Este email já está sendo usado"
+    },
+    "login": {
+      "success": "Login realizado com sucesso",
+      "invalidCredentials": "Email e/ou senha inválidos"
     }
   },
   "gui": {
